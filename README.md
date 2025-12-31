@@ -124,6 +124,21 @@ Maximum functionality is pushed to shaders including:
 - [x] Looping audio playback
 - [x] Listener position synchronized with camera
 
+### Phase 8: Interactive Controls ✓
+- [x] WASD keyboard movement (forward/back/strafe)
+- [x] Mouse look with yaw/pitch rotation
+- [x] Velocity-based movement with damping (0.85)
+- [x] SDL relative mouse mode for FPS controls
+- [x] ESC key to quit
+- [x] Screenshots: move_0.png, move_1.png (player perspective)
+
+### Phase 9: Advanced Shaders ✓
+- [x] Exponential fog calculation (1.0-exp(-distance*g))
+- [x] Distance-based dynamic lighting (falloff at 500 units)
+- [x] Per-pixel color blending (fog mix with sky color)
+- [x] All lighting/fog computed in fragment shader
+- [x] Screenshots: Enhanced atmospheric rendering
+
 ## Running
 
 ```bash
@@ -136,6 +151,8 @@ Maximum functionality is pushed to shaders including:
 
 ## Current Status
 
+**Code Size:** 63 lines total (41 C + 11 vertex shader + 11 fragment shader)
+
 **Completed:**
 - ✓ SDL2 window creation and OpenGL 3.3 context
 - ✓ GLSL shader compilation and linking
@@ -145,15 +162,20 @@ Maximum functionality is pushed to shaders including:
 - ✓ BSP face triangulation via edge lists (84 triangles from 38 faces)
 - ✓ PCX palette loading (768-byte RGB colormap)
 - ✓ WAL texture loading (8-bit palettized → RGB)
+- ✓ GL texture array for per-face texture rendering
 - ✓ Texinfo-based UV coordinate calculation
 - ✓ Lightmap extraction and atlas packing (512x512)
 - ✓ Multi-texture blending (texture * lightmap)
-- ✓ Orbital camera animation system
+- ✓ WASD + mouse look FPS controls
+- ✓ Velocity-based movement with exponential damping
+- ✓ Shader-based exponential fog
+- ✓ Distance-based dynamic lighting
 - ✓ OpenAL 3D positional audio with procedural sound
 
 **TODO:**
 - MD2 model animation (requires model assets)
-- Collision detection
+- BSP collision detection
+- Larger map support
 
 ## Code Style
 
