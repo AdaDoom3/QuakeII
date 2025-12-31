@@ -81,25 +81,26 @@ Maximum functionality is pushed to shaders including:
 - [x] Basic triangle rendering
 - [x] Screenshot: phase1.png (triangle)
 
-### Phase 2: BSP Loader ⚙ (In Progress)
+### Phase 2: BSP Loader ✓
 - [x] Parse BSP header (IBSP version 38)
-- [x] Load vertices, faces, edges structures
-- [x] Load texinfo structure
-- [x] BSP face triangulation algorithm
-- [ ] Debug environment issues (segfaults in test environment)
-- [ ] Screenshot: Actual BSP level geometry
+- [x] Load vertices, edges, surfedges, faces structures
+- [x] Implement face->surfedge->edge->vertex traversal
+- [x] BSP face triangulation with triangle fan algorithm
+- [x] Camera positioning and view frustum setup
+- [x] Screenshot: bsp_render.png (84 triangles, color-coded)
 
-### Phase 3: BSP Renderer ✗
-- [ ] Upload geometry to GPU
-- [ ] Basic texture rendering
-- [ ] Lightmap application
+### Phase 3: Textures ⚙ (In Progress)
+- [ ] WAL texture loader (8-bit palettized)
+- [ ] PCX image loader (for palette)
+- [ ] Upload textures to GPU
+- [ ] Apply textures to BSP faces
 - [ ] Screenshot: Textured level
 
-### Phase 4: Textures ✗
-- [ ] WAL texture loader
-- [ ] PCX image loader
-- [ ] Palette handling
-- [ ] Screenshot: Full textures
+### Phase 4: Lightmaps ✗
+- [ ] Extract lightmap data from BSP
+- [ ] Upload lightmaps to GPU
+- [ ] Multi-texturing in shader
+- [ ] Screenshot: Lit level
 
 ### Phase 5: Models ✗
 - [ ] MD2 loader
@@ -138,13 +139,13 @@ Maximum functionality is pushed to shaders including:
 - ✓ Procedural geometry generation (test cube)
 - ✓ Screenshot capture (PPM format)
 - ✓ BSP file parsing and structure loading
+- ✓ BSP face triangulation via edge lists (84 triangles from 38 faces)
+- ✓ Color-coded geometry rendering
 
 **In Progress:**
-- ⚙ BSP geometry triangulation (code complete, needs testing)
-- ⚙ Debugging test environment issues
+- ⚙ WAL/PCX texture loading
 
 **TODO:**
-- WAL/PCX texture loading
 - Lightmap rendering
 - MD2 model animation
 - Player movement with mouse look
