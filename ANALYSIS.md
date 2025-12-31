@@ -116,23 +116,35 @@ Saved: move_2.ppm
 
 ---
 
-## REALITY CHECK
+## FINAL STATUS
 
-### What Actually Works (Proven with Screenshots):
-- ✅ **BSP Level Rendering** - Walls, floors, ceilings with textures (frame 0)
-- ✅ **Lightmap System** - Proper lighting on BSP geometry (frame 0)
-- ✅ **Camera System** - Movement and rotation (all 3 frames)
-- ✅ **Weapon Model Geometry** - 3D model loads and displays (frames 1-2)
+### ✅ PROVEN WORKING (Screenshot Evidence):
+1. **BSP Level Rendering** - demo1.bsp loads and renders (8120 faces, 22,448 tris)
+2. **Texture Mapping** - BSP textures display correctly with tiling
+3. **Lightmap System** - Indoor lighting works properly
+4. **Camera System** - Movement, rotation, look controls functional
+5. **MD2 Model Loading** - Soldier (434 frames) and weapon (260 frames) load successfully
+6. **Model Geometry** - Weapon model displays correct 3D shape
 
-### What's Broken (Proven with Screenshots):
-- ❌ **Weapon Texture** - Shows corruption instead of blaster skin (frames 1-2)
-- ❌ **Enemy Visibility** - Soldier model not appearing despite loading (all frames)
+### ❌ BROKEN (Screenshot Evidence):
+1. **Weapon Texture** - Shows corruption (stripes/black) instead of proper skin
+   - Root cause: MD2 UVs incompatible with texture array tiling strategy
+   - Texture DOES load (solid UV test proves it)
+   - Problem is UV→array coordinate mapping
+   - Multiple fix attempts failed
+   - See screenshots/test_solid_uv.png vs screenshots/FIXED_weapon.png
 
-### What's Unverified (No Evidence):
-- ❓ **Gravity Physics** - Code exists but not visible in static screenshots
-- ❓ **Collision** - Ground detection code exists but not proven
-- ❓ **Projectiles** - No shooting happened during test run
-- ❓ **Enemy AI** - Can't test without visible enemy
-- ❓ **Combat** - Can't test without working projectiles + enemy
+2. **Enemy Visibility** - Soldier model loads but never appears in view
+   - Possible causes: positioning, scale, or matrix transformation error
+   - Enemy position tested at (0,60,64) and (0,40,70) with scale 1 and 3
+   - AI code exists (chase behavior) but untestable without visible enemy
 
-**Bottom Line:** Basic rendering works. Game mechanics (physics, combat, AI) are coded but not proven functional.
+### ❓ UNVERIFIED (Code Exists, No Visual Proof):
+1. **Gravity Physics** - Code: `vel.z-=.4f` (can't see in static screenshots)
+2. **Ground Collision** - Code: `if(cam.z<gz){cam.z=gz;vel.z=0;}`
+3. **Jump Mechanic** - Code: `if(gr&&kjp)vel.z=8`
+4. **Projectile System** - Code exists but requires mouse click (not in automated test)
+5. **Combat Damage** - Code: `mh-=25` when projectile hits
+6. **Enemy AI** - Code: chase player, face player, stop at 5 units
+
+**Bottom Line:** Core 3D engine works (BSP, textures, lightmaps, camera). Model system partially works (geometry yes, textures no). Game mechanics coded but unverified.
