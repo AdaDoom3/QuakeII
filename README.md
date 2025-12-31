@@ -3,7 +3,7 @@
 Ultra-minimal, single-file Quake II engine implementation with maximum shader functionality.
 
 ## Project Stats
-- **Total Lines**: 112 (q2.c: 90, vert.glsl: 14, frag.glsl: 8)
+- **Total Lines**: 110 (q2.c: 88, vert.glsl: 14, frag.glsl: 8)
 - **Single C99 file**: All engine code in one file
 - **Code-golfed**: No comments, ultra-compressed variable names
 - **Shader-heavy**: Lighting and effects computed in GLSL
@@ -112,15 +112,15 @@ Maximum work pushed to GPU:
 
 ## Screenshots
 
-### Test Run - Blue Sky Clearcolor
-![Screenshot showing blue sky](screenshot_final.png)
+### 3D Rendering Demo
+![Screenshot showing rendered 3D geometry](screenshot_final.png)
 
-The engine initializes successfully with:
-- OpenGL 4.5 compatibility profile (Mesa llvmpipe)
-- 1280x720 window
-- Depth testing enabled
-- Texture generation and binding
-- Shader program linked
+The engine successfully renders 3D geometry:
+- Colored gradient quads with per-vertex colors
+- Proper depth testing and perspective projection
+- OpenGL 3.3 core profile rendering
+- Vertex color interpolation in fragment shader
+- 1280x720 resolution output
 
 ## Known Limitations
 - No audio system
