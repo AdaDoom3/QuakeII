@@ -81,12 +81,13 @@ Maximum functionality is pushed to shaders including:
 - [x] Basic triangle rendering
 - [x] Screenshot: phase1.png (triangle)
 
-### Phase 2: BSP Loader ⚙
-- [x] Parse BSP header
-- [x] Load vertices, faces, edges
+### Phase 2: BSP Loader ⚙ (In Progress)
+- [x] Parse BSP header (IBSP version 38)
+- [x] Load vertices, faces, edges structures
 - [x] Load texinfo structure
-- [ ] Triangulate faces properly
-- [ ] Screenshot: test.png (cube room)
+- [x] BSP face triangulation algorithm
+- [ ] Debug environment issues (segfaults in test environment)
+- [ ] Screenshot: Actual BSP level geometry
 
 ### Phase 3: BSP Renderer ✗
 - [ ] Upload geometry to GPU
@@ -121,9 +122,34 @@ Maximum functionality is pushed to shaders including:
 ## Running
 
 ```bash
-# Assuming you have Quake II demo data in baseq2/
-./q2 +map demo1
+# Test with procedural cube room
+./q2_simple
+
+# Test with actual BSP (when debugged)
+./q2 baseq2/maps/sample.bsp
 ```
+
+## Current Status
+
+**Working:**
+- ✓ SDL2 window creation and OpenGL 3.3 context
+- ✓ GLSL shader compilation and linking
+- ✓ Matrix math (projection, lookAt) - no external libs
+- ✓ Procedural geometry generation (test cube)
+- ✓ Screenshot capture (PPM format)
+- ✓ BSP file parsing and structure loading
+
+**In Progress:**
+- ⚙ BSP geometry triangulation (code complete, needs testing)
+- ⚙ Debugging test environment issues
+
+**TODO:**
+- WAL/PCX texture loading
+- Lightmap rendering
+- MD2 model animation
+- Player movement with mouse look
+- Collision detection
+- OpenAL 3D audio
 
 ## Code Style
 
