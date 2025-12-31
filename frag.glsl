@@ -8,4 +8,4 @@ uniform sampler2D e;
 uniform vec3 a;
 uniform float g;
 out vec4 o;
-void main(){vec4 t=texture(d,vec3(u,ti)),l=texture(e,w);vec3 r=f-a;float ds=length(r),lt=max(0.0,1.0-ds/1000.0)*5.0;float lm=max(l.r,max(l.g,l.b))*6.0;o=vec4(t.rgb*clamp(lm+lt,8.0,20.0),1);}
+void main(){vec4 alb=texture(d,vec3(u,ti));vec3 lm=texture(e,w).rgb;alb.rgb=pow(alb.rgb,vec3(2.2));lm=pow(lm,vec3(2.2))*2.0;vec3 col=alb.rgb*(lm+vec3(0.8));col=(col*(2.51*col+0.03))/(col*(2.43*col+0.59)+0.14);o=vec4(pow(col,vec3(1.0/2.2)),1);}
