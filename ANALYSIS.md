@@ -118,13 +118,15 @@ Saved: move_2.ppm
 
 ## FINAL STATUS
 
-### ✅ PROVEN WORKING (Screenshot Evidence):
+### ✅ PROVEN WORKING (Screenshot + Console Evidence):
 1. **BSP Level Rendering** - demo1.bsp loads and renders (8120 faces, 22,448 tris)
 2. **Texture Mapping** - BSP textures display correctly with tiling
 3. **Lightmap System** - Indoor lighting works properly
 4. **Camera System** - Movement, rotation, look controls functional
 5. **MD2 Model Loading** - Soldier (434 frames) and weapon (260 frames) load successfully
 6. **Model Geometry** - Weapon model displays correct 3D shape
+7. **Gravity Physics** - PROVEN: Console shows fall z=200→179→125→45→-56→-176→-311→-352 (screenshots/move_0_fall.png @ z=200 shows ceiling, move_1_fall.png @ z=-311 mid-fall, move_2_fall.png @ z=-352 on ground)
+8. **Ground Collision** - PROVEN: Console shows camera stops at z=-352 and stays there for all subsequent frames (Fr70-Fr160: z=-352.0)
 
 ### ❌ BROKEN (Screenshot Evidence):
 1. **Weapon Texture** - Shows corruption (stripes/black) instead of proper skin
@@ -140,15 +142,9 @@ Saved: move_2.ppm
    - AI code exists (chase behavior) but untestable without visible enemy
 
 ### ❓ UNVERIFIED (Code Exists, No Visual Proof):
-1. **Gravity Physics** - Code: `vel.z-=.4f` each frame
-   - Camera should fall from z=64 to ground at z=-352
-   - Screenshots show sky because test script tilts camera UP (frames 120-180: `pi+=.005f`)
-   - Collision code exists: `if(cam.z<gz){cam.z=gz;vel.z=0;}`
-   - Likely working but not visually confirmed due to camera angle
+1. **Jump Mechanic** - Code: `if(gr&&kjp)vel.z=8` (requires SPACE key input)
+2. **Projectile System** - Code exists but requires mouse click (not in automated test)
+3. **Combat Damage** - Code: `mh-=25` when projectile hits
+4. **Enemy AI** - Code: chase player, face player, stop at 5 units
 
-2. **Jump Mechanic** - Code: `if(gr&&kjp)vel.z=8`
-3. **Projectile System** - Code exists but requires mouse click (not in automated test)
-4. **Combat Damage** - Code: `mh-=25` when projectile hits
-5. **Enemy AI** - Code: chase player, face player, stop at 5 units
-
-**Bottom Line:** Core 3D engine works (BSP, textures, lightmaps, camera). Model system partially works (geometry yes, textures no). Physics code exists and likely functional but screenshots don't show ground due to camera tilt.
+**Bottom Line:** Core 3D engine fully functional (BSP, textures, lightmaps, camera, physics, collision). Model system partially works (geometry yes, textures no). Game mechanics (jump, shooting, combat) coded but require interactive input to verify.
