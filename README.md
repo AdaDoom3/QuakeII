@@ -89,18 +89,21 @@ Maximum functionality is pushed to shaders including:
 - [x] Camera positioning and view frustum setup
 - [x] Screenshot: bsp_render.png (84 triangles, color-coded)
 
-### Phase 3: Textures ⚙ (In Progress)
-- [ ] WAL texture loader (8-bit palettized)
-- [ ] PCX image loader (for palette)
-- [ ] Upload textures to GPU
-- [ ] Apply textures to BSP faces
-- [ ] Screenshot: Textured level
+### Phase 3: Textures ✓
+- [x] PCX palette loader (768-byte RGB from colormap.pcx)
+- [x] WAL texture loader (8-bit palettized → RGB conversion)
+- [x] Upload textures to GPU with OpenGL
+- [x] Extract texinfo from BSP (planar projection axes)
+- [x] Calculate texture coordinates using texinfo mapping
+- [x] Apply textures to BSP faces
+- [x] Screenshot: bsp_render.png (textured level)
 
-### Phase 4: Lightmaps ✗
-- [ ] Extract lightmap data from BSP
-- [ ] Upload lightmaps to GPU
-- [ ] Multi-texturing in shader
-- [ ] Screenshot: Lit level
+### Phase 4: Lightmaps ✓
+- [x] Extract lightmap data from BSP (lump 7)
+- [x] Pack lightmaps into 512x512 atlas texture
+- [x] Calculate lightmap coordinates per-face
+- [x] Multi-texturing in shader (texture * lightmap * 2.0)
+- [x] Screenshot: bsp_render.png (lit level)
 
 ### Phase 5: Models ✗
 - [ ] MD2 loader

@@ -6,4 +6,4 @@ uniform sampler2D d,e;
 uniform vec3 a;
 uniform float g;
 out vec4 o;
-void main(){vec4 t=texture(d,u);o=vec4(t.rgb*q,1);}
+void main(){vec4 t=texture(d,u),l=texture(e,w);o=vec4(t.rgb*l.rgb*2.0,1);}
