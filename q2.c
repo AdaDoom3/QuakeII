@@ -1,5 +1,7 @@
 #include<GL/glew.h>
 #include<SDL2/SDL.h>
+#include<AL/al.h>
+#include<AL/alc.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -20,6 +22,7 @@ void SS(const char*p){U*d=malloc(W*H*3);glReadPixels(0,0,W,H,GL_RGB,GL_UNSIGNED_
 int main(int ac,char**av){
 SDL_Init(SDL_INIT_VIDEO);SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION,3);SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION,3);SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,SDL_GL_CONTEXT_PROFILE_CORE);
 w=SDL_CreateWindow("Q2",0,0,W,H,SDL_WINDOW_OPENGL);c=SDL_GL_CreateContext(w);glewInit();glEnable(GL_DEPTH_TEST);
+ALCdevice*ad=alcOpenDevice(0);ALCcontext*ac_=alcCreateContext(ad,0);alcMakeContextCurrent(ac_);I ab,as;S*aw=malloc(44100*sizeof(S));for(I i=0;i<44100;i++)aw[i]=sinf(i*.02f)*16384;alGenBuffers(1,&ab);alBufferData(ab,AL_FORMAT_MONO16,aw,44100*sizeof(S),44100);alGenSources(1,&as);alSourcei(as,AL_BUFFER,ab);alSource3f(as,AL_POSITION,120,-80,88);alSourcei(as,AL_LOOPING,AL_TRUE);alSourcePlay(as);free(aw);printf("Audio: OK\n");
 I vs=CS(GL_VERTEX_SHADER,"vert.glsl"),fs=CS(GL_FRAGMENT_SHADER,"frag.glsl");prg=glCreateProgram();glAttachShader(prg,vs);glAttachShader(prg,fs);glLinkProgram(prg);glUseProgram(prg);
 LP();tex=LW("baseq2/textures/eq2/wall.wal");
 BS(ac>1?av[1]:"baseq2/maps/sample.bsp");
@@ -31,7 +34,7 @@ glEnableVertexAttribArray(3);glVertexAttribPointer(3,3,GL_FLOAT,0,40,(void*)28);
 cam=(V){0,0,600};glDisable(GL_CULL_FACE);
 glActiveTexture(GL_TEXTURE0);glBindTexture(GL_TEXTURE_2D,tex);glUniform1i(glGetUniformLocation(prg,"d"),0);
 glActiveTexture(GL_TEXTURE1);glBindTexture(GL_TEXTURE_2D,lmt);glUniform1i(glGetUniformLocation(prg,"e"),1);
-for(int i=0;i<180;i++){ya=i*.02f;pi=sinf(i*.05f)*.3f;cam.x=120+cosf(ya)*400;cam.y=-80+sinf(ya)*400;cam.z=88+sinf(i*.03f)*100;V t={120,-80,88};M mo=ID(),vi=LK(cam,t,(V){0,0,1}),pj=PR(1.2f,(F)W/H,1,10000);glUniformMatrix4fv(glGetUniformLocation(prg,"m"),1,0,mo.m);glUniformMatrix4fv(glGetUniformLocation(prg,"v"),1,0,vi.m);glUniformMatrix4fv(glGetUniformLocation(prg,"j"),1,0,pj.m);glUniform3f(glGetUniformLocation(prg,"a"),cam.x,cam.y,cam.z);glUniform1f(glGetUniformLocation(prg,"g"),0.0005f);glClearColor(0.5,0.6,0.7,1);glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);glDrawArrays(GL_TRIANGLES,0,nv);SDL_GL_SwapWindow(w);if(i%60==0){char n[32];sprintf(n,"cam_%d.ppm",i/60);SS(n);}SDL_Delay(16);}
+for(int i=0;i<180;i++){ya=i*.02f;pi=sinf(i*.05f)*.3f;cam.x=120+cosf(ya)*400;cam.y=-80+sinf(ya)*400;cam.z=88+sinf(i*.03f)*100;alListener3f(AL_POSITION,cam.x,cam.y,cam.z);V t={120,-80,88};M mo=ID(),vi=LK(cam,t,(V){0,0,1}),pj=PR(1.2f,(F)W/H,1,10000);glUniformMatrix4fv(glGetUniformLocation(prg,"m"),1,0,mo.m);glUniformMatrix4fv(glGetUniformLocation(prg,"v"),1,0,vi.m);glUniformMatrix4fv(glGetUniformLocation(prg,"j"),1,0,pj.m);glUniform3f(glGetUniformLocation(prg,"a"),cam.x,cam.y,cam.z);glUniform1f(glGetUniformLocation(prg,"g"),0.0005f);glClearColor(0.5,0.6,0.7,1);glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);glDrawArrays(GL_TRIANGLES,0,nv);SDL_GL_SwapWindow(w);if(i%60==0){char n[32];sprintf(n,"cam_%d.ppm",i/60);SS(n);}SDL_Delay(16);}
 SS("bsp_render.ppm");
 SDL_Quit();return 0;
 }

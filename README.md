@@ -117,11 +117,12 @@ Maximum functionality is pushed to shaders including:
 - [x] Dynamic camera positioning
 - [x] Screenshots: cam_0.png, cam_1.png, cam_2.png (multiple viewpoints)
 
-### Phase 7: Audio ✗
-- [ ] OpenAL initialization
-- [ ] WAV loading
-- [ ] 3D positional audio
-- [ ] Screenshot: N/A
+### Phase 7: Audio ✓
+- [x] OpenAL device and context initialization
+- [x] Procedural sine wave generation (44.1kHz mono)
+- [x] 3D positional audio source at BSP center
+- [x] Looping audio playback
+- [x] Listener position synchronized with camera
 
 ## Running
 
@@ -135,25 +136,24 @@ Maximum functionality is pushed to shaders including:
 
 ## Current Status
 
-**Working:**
+**Completed:**
 - ✓ SDL2 window creation and OpenGL 3.3 context
 - ✓ GLSL shader compilation and linking
 - ✓ Matrix math (projection, lookAt) - no external libs
-- ✓ Procedural geometry generation (test cube)
 - ✓ Screenshot capture (PPM format)
-- ✓ BSP file parsing and structure loading
+- ✓ BSP file parsing and structure loading (IBSP v38)
 - ✓ BSP face triangulation via edge lists (84 triangles from 38 faces)
-- ✓ Color-coded geometry rendering
-
-**In Progress:**
-- ⚙ WAL/PCX texture loading
+- ✓ PCX palette loading (768-byte RGB colormap)
+- ✓ WAL texture loading (8-bit palettized → RGB)
+- ✓ Texinfo-based UV coordinate calculation
+- ✓ Lightmap extraction and atlas packing (512x512)
+- ✓ Multi-texture blending (texture * lightmap)
+- ✓ Orbital camera animation system
+- ✓ OpenAL 3D positional audio with procedural sound
 
 **TODO:**
-- Lightmap rendering
-- MD2 model animation
-- Player movement with mouse look
+- MD2 model animation (requires model assets)
 - Collision detection
-- OpenAL 3D audio
 
 ## Code Style
 
