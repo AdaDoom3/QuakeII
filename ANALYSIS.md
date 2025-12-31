@@ -140,11 +140,15 @@ Saved: move_2.ppm
    - AI code exists (chase behavior) but untestable without visible enemy
 
 ### ❓ UNVERIFIED (Code Exists, No Visual Proof):
-1. **Gravity Physics** - Code: `vel.z-=.4f` (can't see in static screenshots)
-2. **Ground Collision** - Code: `if(cam.z<gz){cam.z=gz;vel.z=0;}`
-3. **Jump Mechanic** - Code: `if(gr&&kjp)vel.z=8`
-4. **Projectile System** - Code exists but requires mouse click (not in automated test)
-5. **Combat Damage** - Code: `mh-=25` when projectile hits
-6. **Enemy AI** - Code: chase player, face player, stop at 5 units
+1. **Gravity Physics** - Code: `vel.z-=.4f` each frame
+   - Camera should fall from z=64 to ground at z=-352
+   - Screenshots show sky because test script tilts camera UP (frames 120-180: `pi+=.005f`)
+   - Collision code exists: `if(cam.z<gz){cam.z=gz;vel.z=0;}`
+   - Likely working but not visually confirmed due to camera angle
 
-**Bottom Line:** Core 3D engine works (BSP, textures, lightmaps, camera). Model system partially works (geometry yes, textures no). Game mechanics coded but unverified.
+2. **Jump Mechanic** - Code: `if(gr&&kjp)vel.z=8`
+3. **Projectile System** - Code exists but requires mouse click (not in automated test)
+4. **Combat Damage** - Code: `mh-=25` when projectile hits
+5. **Enemy AI** - Code: chase player, face player, stop at 5 units
+
+**Bottom Line:** Core 3D engine works (BSP, textures, lightmaps, camera). Model system partially works (geometry yes, textures no). Physics code exists and likely functional but screenshots don't show ground due to camera tilt.
