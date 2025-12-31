@@ -9,7 +9,7 @@
 #define W 1280
 #define H 720
 typedef unsigned char U;typedef unsigned short S;typedef unsigned int I;typedef int J;typedef float F;typedef struct{F x,y,z;}V;typedef struct{F m[16];}M;typedef struct{I o,l;}L;typedef struct{S v[2];}E;typedef struct{J e;U d;}FE;typedef struct{S p,ps;J fe;S ne,ti;U s[4];J lm;}FC;typedef struct{char n[32];I w,h,o[4];char a[32];J f,c,v;}TX;typedef struct{F v[2][4];I f,val;char n[32];J nx;}TI;
-SDL_Window*w;SDL_GLContext c;I prg,vao,vbo,nv,tex,lmt;F*vb;V cam;F ya,pi;U pal[768];
+SDL_Window*w;SDL_GLContext c;I prg,vao,vbo,nv,tex,lmt;F*vb;V cam,vel;F ya,pi;U pal[768];I kw,ka,ks,kd;
 U*LF(const char*p,I*z){FILE*f=fopen(p,"rb");if(!f)return 0;fseek(f,0,2);*z=ftell(f);fseek(f,0,0);U*b=malloc(*z);fread(b,1,*z,f);fclose(f);return b;}
 I CS(I t,const char*p){char*s=(char*)LF(p,&(I){0});I h=glCreateShader(t);glShaderSource(h,1,(const char**)&s,0);glCompileShader(h);free(s);return h;}
 M ID(){M r;for(int i=0;i<16;i++)r.m[i]=i%5==0;return r;}
@@ -32,10 +32,10 @@ glEnableVertexAttribArray(0);glVertexAttribPointer(0,3,GL_FLOAT,0,40,0);
 glEnableVertexAttribArray(1);glVertexAttribPointer(1,2,GL_FLOAT,0,40,(void*)12);
 glEnableVertexAttribArray(2);glVertexAttribPointer(2,2,GL_FLOAT,0,40,(void*)20);
 glEnableVertexAttribArray(3);glVertexAttribPointer(3,3,GL_FLOAT,0,40,(void*)28);
-cam=(V){0,0,600};glDisable(GL_CULL_FACE);
+cam=(V){0,0,120};vel=(V){0,0,0};ya=0;pi=-.2f;glDisable(GL_CULL_FACE);SDL_SetRelativeMouseMode(1);
 glActiveTexture(GL_TEXTURE0);glBindTexture(GL_TEXTURE_2D_ARRAY,txa);glUniform1i(glGetUniformLocation(prg,"d"),0);
 glActiveTexture(GL_TEXTURE1);glBindTexture(GL_TEXTURE_2D,lmt);glUniform1i(glGetUniformLocation(prg,"e"),1);
-for(int i=0;i<180;i++){ya=i*.02f;pi=sinf(i*.05f)*.3f;cam.x=120+cosf(ya)*400;cam.y=-80+sinf(ya)*400;cam.z=88+sinf(i*.03f)*100;alListener3f(AL_POSITION,cam.x,cam.y,cam.z);V t={120,-80,88};M mo=ID(),vi=LK(cam,t,(V){0,0,1}),pj=PR(1.2f,(F)W/H,1,10000);glUniformMatrix4fv(glGetUniformLocation(prg,"m"),1,0,mo.m);glUniformMatrix4fv(glGetUniformLocation(prg,"v"),1,0,vi.m);glUniformMatrix4fv(glGetUniformLocation(prg,"j"),1,0,pj.m);glUniform3f(glGetUniformLocation(prg,"a"),cam.x,cam.y,cam.z);glUniform1f(glGetUniformLocation(prg,"g"),0.0005f);glClearColor(0.5,0.6,0.7,1);glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);glDrawArrays(GL_TRIANGLES,0,nv);SDL_GL_SwapWindow(w);if(i%60==0){char n[32];sprintf(n,"cam_%d.ppm",i/60);SS(n);}SDL_Delay(16);}
-SS("bsp_render.ppm");
+I q=0,fr=0;while(!q&&fr<240){SDL_Event e;while(SDL_PollEvent(&e)){if(e.type==SDL_QUIT)q=1;if(e.type==SDL_KEYDOWN){I k=e.key.keysym.sym;if(k==SDLK_w)kw=1;if(k==SDLK_a)ka=1;if(k==SDLK_s)ks=1;if(k==SDLK_d)kd=1;if(k==SDLK_ESCAPE)q=1;}if(e.type==SDL_KEYUP){I k=e.key.keysym.sym;if(k==SDLK_w)kw=0;if(k==SDLK_a)ka=0;if(k==SDLK_s)ks=0;if(k==SDLK_d)kd=0;}if(e.type==SDL_MOUSEMOTION){ya+=e.motion.xrel*.002f;pi-=e.motion.yrel*.002f;if(pi>.8f)pi=.8f;if(pi<-.8f)pi=-.8f;}}if(fr<60)ya+=.015f;else if(fr<120){ya+=.015f;kw=1;}else if(fr<180){ya+=.025f;pi+=.005f;}else{ya-=.02f;pi-=.005f;}F fx=-sinf(ya)*cosf(pi),fy=cosf(ya)*cosf(pi),fz=sinf(pi);F rx=cosf(ya),ry=sinf(ya);vel.x*=.85f;vel.y*=.85f;vel.z*=.85f;if(kw){vel.x+=fx*1.5f;vel.y+=fy*1.5f;vel.z+=fz*1.5f;}if(ks){vel.x-=fx*1.5f;vel.y-=fy*1.5f;vel.z-=fz*1.5f;}if(ka){vel.x-=rx*1.5f;vel.y-=ry*1.5f;}if(kd){vel.x+=rx*1.5f;vel.y+=ry*1.5f;}cam.x+=vel.x;cam.y+=vel.y;cam.z+=vel.z;V t={cam.x+fx,cam.y+fy,cam.z+fz};M mo=ID(),vi=LK(cam,t,(V){0,0,1}),pj=PR(1.2f,(F)W/H,1,10000);glUniformMatrix4fv(glGetUniformLocation(prg,"m"),1,0,mo.m);glUniformMatrix4fv(glGetUniformLocation(prg,"v"),1,0,vi.m);glUniformMatrix4fv(glGetUniformLocation(prg,"j"),1,0,pj.m);glUniform3f(glGetUniformLocation(prg,"a"),cam.x,cam.y,cam.z);glUniform1f(glGetUniformLocation(prg,"g"),0.0005f);glClearColor(0.5,0.6,0.7,1);glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);glDrawArrays(GL_TRIANGLES,0,nv);SDL_GL_SwapWindow(w);if(fr%60==0){char n[32];sprintf(n,"move_%d.ppm",fr/60);SS(n);}fr++;SDL_Delay(16);}
+SS("final.ppm");
 SDL_Quit();return 0;
 }
