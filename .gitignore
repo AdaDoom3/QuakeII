@@ -1,0 +1,33 @@
+# Compiled binaries
+q2
+test_gl
+test_gl2
+test_simple
+
+# Build artifacts
+*.o
+*.so
+*.a
+
+# Test files
+*.txt
+test_*.sh
+test_*.c
+
+# Screenshots (except final)
+screenshot1.png
+screenshot2.png
+screenshot3.png
+screenshot4.png
+screenshot5.png
+screenshot_v2.png
+
+# Editor files
+*.swp
+*~
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
