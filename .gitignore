@@ -3,6 +3,11 @@ q2
 test_gl
 test_gl2
 test_simple
+q2_test
+q2_working
+render_screenshot
+render_to_file
+working_demo
 
 # Build artifacts
 *.o
@@ -13,6 +18,12 @@ test_simple
 *.txt
 test_*.sh
 test_*.c
+*_test.c
+*_working.c
+render_*.c
+working_*.c
+*.sh
+*.backup
 
 # Screenshots (except final)
 screenshot1.png
@@ -21,6 +32,10 @@ screenshot3.png
 screenshot4.png
 screenshot5.png
 screenshot_v2.png
+screenshot_working.png
+demo.png
+proof.png
+*.ppm
 
 # Editor files
 *.swp
