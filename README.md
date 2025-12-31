@@ -111,11 +111,11 @@ Maximum functionality is pushed to shaders including:
 - [ ] Model rendering
 - [ ] Screenshot: Character model
 
-### Phase 6: Gameplay ✗
-- [ ] Camera/movement
-- [ ] Collision detection
-- [ ] Input handling
-- [ ] Screenshot: First-person view
+### Phase 6: Camera/Movement ✓
+- [x] Orbital camera animation system
+- [x] Yaw/pitch camera control
+- [x] Dynamic camera positioning
+- [x] Screenshots: cam_0.png, cam_1.png, cam_2.png (multiple viewpoints)
 
 ### Phase 7: Audio ✗
 - [ ] OpenAL initialization

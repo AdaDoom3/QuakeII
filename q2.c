@@ -31,18 +31,7 @@ glEnableVertexAttribArray(3);glVertexAttribPointer(3,3,GL_FLOAT,0,40,(void*)28);
 cam=(V){0,0,600};glDisable(GL_CULL_FACE);
 glActiveTexture(GL_TEXTURE0);glBindTexture(GL_TEXTURE_2D,tex);glUniform1i(glGetUniformLocation(prg,"d"),0);
 glActiveTexture(GL_TEXTURE1);glBindTexture(GL_TEXTURE_2D,lmt);glUniform1i(glGetUniformLocation(prg,"e"),1);
-for(int i=0;i<60;i++){
-V t={120,-80,88};
-M mo=ID(),vi=LK(cam,t,(V){0,0,1}),pj=PR(1.2f,(F)W/H,1,10000);
-glUniformMatrix4fv(glGetUniformLocation(prg,"m"),1,0,mo.m);
-glUniformMatrix4fv(glGetUniformLocation(prg,"v"),1,0,vi.m);
-glUniformMatrix4fv(glGetUniformLocation(prg,"j"),1,0,pj.m);
-glUniform3f(glGetUniformLocation(prg,"a"),cam.x,cam.y,cam.z);
-glUniform1f(glGetUniformLocation(prg,"g"),0.0005f);
-glClearColor(0.5,0.6,0.7,1);glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-glDrawArrays(GL_TRIANGLES,0,nv);
-SDL_GL_SwapWindow(w);SDL_Delay(16);
-}
+for(int i=0;i<180;i++){ya=i*.02f;pi=sinf(i*.05f)*.3f;cam.x=120+cosf(ya)*400;cam.y=-80+sinf(ya)*400;cam.z=88+sinf(i*.03f)*100;V t={120,-80,88};M mo=ID(),vi=LK(cam,t,(V){0,0,1}),pj=PR(1.2f,(F)W/H,1,10000);glUniformMatrix4fv(glGetUniformLocation(prg,"m"),1,0,mo.m);glUniformMatrix4fv(glGetUniformLocation(prg,"v"),1,0,vi.m);glUniformMatrix4fv(glGetUniformLocation(prg,"j"),1,0,pj.m);glUniform3f(glGetUniformLocation(prg,"a"),cam.x,cam.y,cam.z);glUniform1f(glGetUniformLocation(prg,"g"),0.0005f);glClearColor(0.5,0.6,0.7,1);glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);glDrawArrays(GL_TRIANGLES,0,nv);SDL_GL_SwapWindow(w);if(i%60==0){char n[32];sprintf(n,"cam_%d.ppm",i/60);SS(n);}SDL_Delay(16);}
 SS("bsp_render.ppm");
 SDL_Quit();return 0;
 }
