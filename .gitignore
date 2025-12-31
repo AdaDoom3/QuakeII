@@ -56,6 +56,7 @@ baseq2/sprites/
 baseq2/textures/e1u*/
 baseq2/textures/e2u*/
 baseq2/pics/*.dat
+baseq2/pics/*.pcx
 baseq2/maps/demo*.bsp
 
 # Build/debug files
