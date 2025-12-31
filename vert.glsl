@@ -7,4 +7,5 @@ uniform mat4 m,v,j;
 out vec2 u,w;
 out vec3 f,q;
 out vec4 c;
-void main(){gl_Position=j*v*m*vec4(p,1);u=t;w=l;q=n;f=(m*vec4(p,1)).xyz;c=gl_Position;}
+flat out float ti;
+void main(){gl_Position=j*v*m*vec4(p,1);u=t;w=l;q=n;f=(m*vec4(p,1)).xyz;c=gl_Position;ti=n.x;}
