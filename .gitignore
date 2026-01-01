@@ -1,5 +1,8 @@
 # Compiled binaries
 q2
+q2_ultra
+q2_v2
+unpak
 test_gl
 test_gl2
 test_simple
@@ -62,6 +65,7 @@ baseq2/maps/demo*.bsp
 # Build/debug files
 debug_bsp
 run.log
+default.cfg
 
 # Keep original sample assets from qengine
 !baseq2/maps/sample.bsp
