@@ -47,17 +47,9 @@ proof.png
 .DS_Store
 Thumbs.db
 
-# Extracted PAK assets (pak0.pak is tracked, extracted files are not)
-baseq2/demos/
-baseq2/env/
-baseq2/models/
-baseq2/sound/
-baseq2/sprites/
-baseq2/textures/e1u*/
-baseq2/textures/e2u*/
-baseq2/pics/*.dat
-baseq2/pics/*.pcx
-baseq2/maps/demo*.bsp
+# Extracted PAK assets (copyrighted game data from pak0.pak)
+# Users must extract their own using unpak.py
+baseq2/
 
 # Build/debug files
 debug_bsp
