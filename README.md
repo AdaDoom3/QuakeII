@@ -146,6 +146,7 @@ Tested configuration:
 - No network multiplayer
 - No save/load
 - Auto-quits after 240 frames (testing mode)
+- MD2 weapon models have rendering artifacts (triangle strip winding order issue)
 
 ## Screenshots
 
