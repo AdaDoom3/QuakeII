@@ -46,3 +46,25 @@ proof.png
 # OS files
 .DS_Store
 Thumbs.db
+
+# Extracted PAK assets (pak0.pak is tracked, extracted files are not)
+baseq2/demos/
+baseq2/env/
+baseq2/models/
+baseq2/sound/
+baseq2/sprites/
+baseq2/textures/e1u*/
+baseq2/textures/e2u*/
+baseq2/pics/*.dat
+baseq2/pics/*.pcx
+baseq2/maps/demo*.bsp
+
+# Build/debug files
+debug_bsp
+run.log
+
+# Keep original sample assets from qengine
+!baseq2/maps/sample.bsp
+!baseq2/maps/sample.map
+!baseq2/maps/sample.prt
+!baseq2/textures/eq2/
