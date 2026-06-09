@@ -1,0 +1,4 @@
+.scala-build/
+*.class
+shots/frame_*.png
+.bsp/
